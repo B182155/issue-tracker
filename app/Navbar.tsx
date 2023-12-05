@@ -1,6 +1,6 @@
 'use client';
-import { useSession } from 'next-auth/react';
-import { usePathname } from 'next/navigation';
+import { useSession, signOut } from 'next-auth/react';
+import { usePathname, useRouter } from 'next/navigation';
 import { FaBug } from 'react-icons/fa';
 
 import { Box, Flex } from '@radix-ui/themes';
@@ -31,8 +31,7 @@ const NavLinks = () => {
           <Link
             href={item.link}
             className={classnames({
-              'text-gray-600': currentpath !== item.link,
-              'hover:text-gray-900': true,
+              'text-gray-600 hover:text-gray-900 transition-colors': true,
               'active:text-gray-900': currentpath === item.link,
             })}
           >
@@ -71,12 +70,12 @@ const Navbar = () => {
 const AuthStatus = () => {
   const { status, data: session } = useSession();
 
-  {
-    status === 'loading' && <Skeleton width="3rem" />;
+  if (status === 'loading') {
+    return <Skeleton width="3rem" />;
   }
 
-  {
-    status === 'unauthenticated' && <Link href="api/auth/signin">Login</Link>;
+  if (status === 'unauthenticated') {
+    return <Link href="api/auth/signin">Login</Link>;
   }
 
   return (
@@ -101,6 +100,7 @@ const AuthStatus = () => {
 
               <DropdownMenu.Item className="mt-1 p-1 hover:bg-purple-700 hover:text-white">
                 <Link href="/api/auth/signout">Sign Out</Link>
+                {/* {!session && router.push('/issues')} */}
               </DropdownMenu.Item>
               <DropdownMenu.DropdownMenuArrow />
             </DropdownMenu.DropdownMenuContent>

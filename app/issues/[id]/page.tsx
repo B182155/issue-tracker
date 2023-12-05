@@ -11,6 +11,7 @@ import DeleteIssueButton from './DeleteIssueButton';
 
 import { getServerSession } from 'next-auth';
 import authOptions from '@/app/auth/authOptions';
+import Assignee from './Assignee';
 
 const IssueDetails = dynamic(() => import('./IssueDetails'), {
   ssr: false,
@@ -45,6 +46,7 @@ const IssueDetailsPage = async ({ params }: Props) => {
             direction="column"
             gap="4"
           >
+            <Assignee issue={issue!} />
             <EditIssueButton issueId={issue?.id!} />
             <DeleteIssueButton issueId={issue?.id!} />
           </Flex>
