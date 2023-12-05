@@ -40,3 +40,32 @@ export async function PATCH(
     }
   }
 }
+
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const issue = await prisma.issue.findUnique({
+      where: {
+        id: parseInt(params.id),
+      },
+    });
+
+    if (!issue) {
+      return NextResponse.json({ error: 'Invalid Issue' }, { status: 400 });
+    }
+
+    await prisma.issue.delete({
+      where: {
+        id: issue.id,
+      },
+    });
+
+    return NextResponse.json({});
+  } catch (error) {
+    if (error instanceof Error) {
+      return NextResponse.json(error.stack, { status: 500 });
+    }
+  }
+}
