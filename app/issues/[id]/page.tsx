@@ -1,7 +1,6 @@
 import prisma from '@/prisma/Client';
 import { Box, Flex, Grid } from '@radix-ui/themes';
 
-import delay from 'delay';
 import EditIssueButton from './EditIssueButton';
 
 import dynamic from 'next/dynamic';
@@ -25,12 +24,12 @@ const IssueDetailsPage = async ({ params }: Props) => {
     },
   });
 
-  delay(2000);
+  // delay(2000);
   return (
     <Grid
       columns={{ initial: '1', sm: '5' }}
       gap="4"
-      className="mt-14 ml-8"
+      className="mt-6 ml-8"
     >
       <Box className="md:col-span-4">
         <IssueDetails issue={issue!} />
