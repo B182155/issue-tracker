@@ -10,6 +10,8 @@ import Link from 'next/link';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import * as Avatar from '@radix-ui/react-avatar';
 
+import Skeleton from '@/app/components/Skeleton';
+
 const NavLinks = () => {
   const currentpath = usePathname();
   const navItems = [
@@ -70,7 +72,7 @@ const AuthStatus = () => {
   const { status, data: session } = useSession();
 
   {
-    status === 'loading' && null;
+    status === 'loading' && <Skeleton width="3rem" />;
   }
 
   {

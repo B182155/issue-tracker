@@ -1,10 +1,8 @@
 // 'use client';
 import prisma from '@/prisma/Client';
-import { Button, Table, ThemePanel } from '@radix-ui/themes';
-import React from 'react';
+import { Button, Table } from '@radix-ui/themes';
 import StatusBadge from '../components/StatusBadge';
 
-import delay from 'delay';
 import Link from 'next/link';
 
 import LinkComp from '../components/Link';
@@ -12,7 +10,7 @@ import LinkComp from '../components/Link';
 const Issuespage = async () => {
   const issues = await prisma.issue.findMany();
 
-  delay(5000);
+  // delay(5000);
 
   return (
     <div className="max-w-5xl">

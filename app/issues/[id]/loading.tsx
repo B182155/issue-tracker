@@ -1,6 +1,4 @@
-import StatusBadge from '@/app/components/StatusBadge';
-import { Flex, Heading, Card, Box } from '@radix-ui/themes';
-import React from 'react';
+import { Card, Flex } from '@radix-ui/themes';
 
 import Skeleton from '@/app/components/Skeleton';
 
