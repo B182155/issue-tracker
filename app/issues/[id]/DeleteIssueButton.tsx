@@ -1,29 +1,39 @@
 'use client';
-import {
-  Button,
-  Dialog,
-  Flex,
-  TextField,
-  Text,
-  AlertDialog,
-} from '@radix-ui/themes';
+import Spinner from '@/app/components/Spinner';
+import { Button, Dialog, Flex } from '@radix-ui/themes';
 import axios from 'axios';
-import { error } from 'console';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { MdOutlineDeleteForever } from 'react-icons/md';
 
 const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
   const router = useRouter();
   const [isError, setError] = useState(false);
+  const [isDeleting, setDeleting] = useState(false);
+
+  const deleteIssue = async () => {
+    try {
+      setDeleting(true);
+      await axios.delete('/api/issues/' + issueId);
+      router.push('/issues');
+      router.refresh();
+    } catch (error) {
+      setError(true);
+      setDeleting(false);
+    }
+  };
   return (
     <>
       <Dialog.Root>
         <Dialog.Trigger>
-          <Button color="red">
+          <Button
+            color="red"
+            disabled={isDeleting}
+          >
             <MdOutlineDeleteForever />
             Delete Issue
+            {isDeleting && <Spinner />}
           </Button>
         </Dialog.Trigger>
 
@@ -50,20 +60,7 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
               </Button>
             </Dialog.Close>
             <Dialog.Close>
-              <Button
-                onClick={async () => {
-                  try {
-                    throw new Error();
-                    await axios.delete('/api/issues/' + issueId);
-                    router.push('/issues');
-                    router.refresh();
-                  } catch (error) {
-                    setError(true);
-                  }
-                }}
-              >
-                Delete
-              </Button>
+              <Button onClick={deleteIssue}>Delete</Button>
             </Dialog.Close>
           </Flex>
         </Dialog.Content>

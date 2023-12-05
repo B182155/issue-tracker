@@ -1,21 +1,20 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 'use client';
-import { Box, Button, Callout, Flex, TextFieldInput } from '@radix-ui/themes';
-import React, { useState } from 'react';
-import 'easymde/dist/easymde.min.css';
-import { Controller, useForm } from 'react-hook-form';
-import axios from 'axios';
-import { useRouter } from 'next/navigation';
 import { InfoCircledIcon } from '@radix-ui/react-icons';
+import { Button, Callout, Flex, TextFieldInput } from '@radix-ui/themes';
+import axios from 'axios';
+import 'easymde/dist/easymde.min.css';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import z from 'zod';
 
-import dynamic from 'next/dynamic';
-import { IssueSchema } from '@/app/validationSchema';
 import ErrorMessageComp from '@/app/components/ErrorMessageComp';
 import Spinner from '@/app/components/Spinner';
+import { IssueSchema } from '@/app/validationSchema';
 import { Issue } from '@prisma/client';
 import SimpleMDE from 'react-simplemde-editor';
 
@@ -81,8 +80,9 @@ const IssueFormPage = ({ issue }: { issue?: Issue }) => {
             control={control}
             render={({ field }) => (
               <SimpleMDE
-                defaultValue={issue?.description}
                 placeholder="Description"
+                defaultValue={issue?.description}
+                // value={issue?.description}
                 {...field}
               />
             )}
