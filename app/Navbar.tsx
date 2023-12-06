@@ -92,21 +92,19 @@ const AuthStatus = () => {
             </Avatar.Root>
           </DropdownMenu.Trigger>
           <DropdownMenu.Portal>
-            <DropdownMenu.DropdownMenuContent
+            <DropdownMenu.Content
+              className="min-w-[180px] bg-gray-200 rounded-md p-[5px] shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)] will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade"
               sideOffset={5}
-              className="px-4 py-2 bg-gray-200 shadow-lg rounded-lg"
             >
-              <DropdownMenu.Label>{session.user?.name}</DropdownMenu.Label>
+              <DropdownMenu.Label className="pl-[25px] text-sm leading-[25px] text-mauve11">
+                {session.user?.name}
+              </DropdownMenu.Label>
 
-              <DropdownMenu.Item
-                style={{ backgroundColor: 'var(--purple-9)' }}
-                className="mt-1 p-1 rounded-md text-white text-center"
-              >
+              <DropdownMenu.Item className="group text-[15px] leading-none text-violet11 rounded-[3px] flex items-center h-[25px] px-[5px] relative pl-[25px] select-none outline-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1">
                 <Link href="/api/auth/signout">Sign Out</Link>
-                {/* {!session && router.push('/issues')} */}
               </DropdownMenu.Item>
               <DropdownMenu.DropdownMenuArrow />
-            </DropdownMenu.DropdownMenuContent>
+            </DropdownMenu.Content>
           </DropdownMenu.Portal>
         </DropdownMenu.Root>
       )}
