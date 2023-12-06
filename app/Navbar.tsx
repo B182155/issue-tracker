@@ -98,7 +98,10 @@ const AuthStatus = () => {
             >
               <DropdownMenu.Label>{session.user?.name}</DropdownMenu.Label>
 
-              <DropdownMenu.Item className="mt-1 p-1 hover:bg-purple-700 hover:text-white">
+              <DropdownMenu.Item
+                style={{ backgroundColor: 'var(--purple-9)' }}
+                className="mt-1 p-1 rounded-md text-white text-center"
+              >
                 <Link href="/api/auth/signout">Sign Out</Link>
                 {/* {!session && router.push('/issues')} */}
               </DropdownMenu.Item>
