@@ -1,6 +1,6 @@
 // 'use client';
 import prisma from '@/prisma/Client';
-import { Box, Flex, Grid } from '@radix-ui/themes';
+import { Box, Card, Flex, Grid } from '@radix-ui/themes';
 
 import EditIssueButton from './EditIssueButton';
 
@@ -35,10 +35,15 @@ const IssueDetailsPage = async ({ params }: Props) => {
     <Grid
       columns={{ initial: '1', sm: '5' }}
       gap="4"
-      className="mt-6 ml-8"
+      className="mt-6 "
     >
       <Box className="md:col-span-4">
-        <IssueDetails issue={issue!} />
+        <Card
+          size="2"
+          variant="surface"
+        >
+          <IssueDetails issue={issue!} />
+        </Card>
       </Box>
       {session && (
         <Box>
