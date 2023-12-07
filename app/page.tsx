@@ -7,9 +7,7 @@ import { Flex, Grid, Card } from '@radix-ui/themes';
 import prisma from '@/prisma/Client';
 import IssuesChart from './IssuesChart';
 
-// interface Props {
-//   searchParams: { page: string };
-// }
+import { Metadata } from 'next';
 
 export default async function Home() {
   const open = await prisma.issue.count({
@@ -54,3 +52,20 @@ export default async function Home() {
     </Grid>
   );
 }
+
+export const metadata: Metadata = {
+  title: 'Issue Tracker -Dashboard',
+  description: 'view a summary of project issues',
+
+  // openGraph: {
+  //   url: 'https://issue-tracker.vercel.app/',
+  //   title: 'Issue Tracker -Dashboard',
+  //   description: 'view a summary of project issues',
+  //   images: [
+  //     {
+  //       url: 'https://issue-tracker.vercel.app/issue-tracker.png',
+  //       alt: 'Issue Tracker -Dashboard',
+  //     },
+  //   ],
+  // },
+};
