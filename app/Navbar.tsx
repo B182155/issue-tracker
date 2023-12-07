@@ -25,9 +25,13 @@ const NavLinks = () => {
     },
   ];
   return (
-    <ul className="flex gap-4 items-center px-4">
+    <Flex
+      gap="4"
+      align="center"
+      px="4"
+    >
       {navItems.map((item) => (
-        <li key={item.name}>
+        <Box key={item.name}>
           <Link
             href={item.link}
             className={classnames({
@@ -37,9 +41,9 @@ const NavLinks = () => {
           >
             {item.name}
           </Link>
-        </li>
+        </Box>
       ))}
-    </ul>
+    </Flex>
   );
 };
 
@@ -49,12 +53,15 @@ const Navbar = () => {
     <nav className="border-b p-2">
       <Flex
         direction="row"
-        gap="4"
+        // gap="6"
         justify="between"
         align="center"
         height="auto"
       >
-        <Flex align="center">
+        <Flex
+          align="center"
+          gap="4"
+        >
           <Link href="/">
             <FaBug />
           </Link>

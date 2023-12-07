@@ -82,7 +82,6 @@ const IssueFormPage = ({ issue }: { issue?: Issue }) => {
               <SimpleMDE
                 placeholder="Description"
                 defaultValue={issue?.description}
-                // value={issue?.description}
                 {...field}
               />
             )}
