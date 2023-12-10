@@ -24,12 +24,13 @@ interface Props {
 }
 
 const fetchIssueDetails = cache((issueId: string) =>
-  prisma.issue.findUnique({ where: { id: parseInt(issueId) } })
+  prisma.issue.findUnique({ where: { id: issueId } })
 );
 
 const IssueDetailsPage = async ({ params }: Props) => {
   const session = await getServerSession(authOptions);
   const issue = await fetchIssueDetails(params.id);
+  // console.log(issue);
 
   // delay(2000);
   return (

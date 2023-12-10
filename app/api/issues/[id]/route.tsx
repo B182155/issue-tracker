@@ -40,7 +40,7 @@ export async function PATCH(
 
     const issue = await prisma.issue.findUnique({
       where: {
-        id: parseInt(params.id),
+        id: params.id,
       },
     });
 
@@ -78,7 +78,7 @@ export async function DELETE(
     }
     const issue = await prisma.issue.findUnique({
       where: {
-        id: parseInt(params.id),
+        id: params.id,
       },
     });
 

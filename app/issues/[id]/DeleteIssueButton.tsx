@@ -7,7 +7,8 @@ import { useState } from 'react';
 
 import { MdOutlineDeleteForever } from 'react-icons/md';
 
-const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
+const DeleteIssueButton = ({ issueId }: { issueId: String }) => {
+  // console.log(`Delete Issue ${issueId}`);
   const router = useRouter();
   const [isError, setError] = useState(false);
   const [isDeleting, setDeleting] = useState(false);

@@ -13,13 +13,10 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 import * as Toast from '@radix-ui/react-toast';
-import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 import Skeleton from '@/app/components/Skeleton';
-import React from 'react';
-import classnames from 'classnames';
-import { SelectItem } from '@radix-ui/themes';
 
 const Assignee = ({ issue }: { issue: Issue }) => {
   const [isError, setError] = useState(false);
