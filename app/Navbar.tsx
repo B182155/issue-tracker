@@ -1,42 +1,40 @@
-'use client';
-import { useSession, signOut } from 'next-auth/react';
-import { usePathname, useRouter } from 'next/navigation';
-import { FaBug } from 'react-icons/fa';
+"use client";
+import { useSession, signOut } from "next-auth/react";
+import { usePathname, useRouter } from "next/navigation";
+import { FaBug } from "react-icons/fa";
 
-import { Box, Flex } from '@radix-ui/themes';
-import classnames from 'classnames';
-import Link from 'next/link';
+import { Box, Flex } from "@radix-ui/themes";
+import classnames from "classnames";
+import Link from "next/link";
 
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import * as Avatar from '@radix-ui/react-avatar';
+import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+import * as Avatar from "@radix-ui/react-avatar";
 
-import Skeleton from '@/app/components/Skeleton';
+import Skeleton from "@/app/components/Skeleton";
+import { ModeToggle } from "./ModeToggle";
 
 const NavLinks = () => {
   const currentpath = usePathname();
   const navItems = [
     {
-      name: 'Dashboard',
-      link: '/',
+      name: "Dashboard",
+      link: "/",
     },
     {
-      name: 'issues',
-      link: '/issues',
+      name: "issues",
+      link: "/issues",
     },
   ];
   return (
-    <Flex
-      gap="4"
-      align="center"
-      px="4"
-    >
+    <Flex gap="4" align="center" px="4">
       {navItems.map((item) => (
         <Box key={item.name}>
           <Link
             href={item.link}
             className={classnames({
-              'text-gray-600 hover:text-gray-900 transition-colors': true,
-              'active:text-gray-900': currentpath === item.link,
+              "text-gray-600 dark:text-white  hover:text-gray-900 transition-colors":
+                true,
+              "active:text-gray-900": currentpath === item.link,
             })}
           >
             {item.name}
@@ -58,16 +56,16 @@ const Navbar = () => {
         align="center"
         height="auto"
       >
-        <Flex
-          align="center"
-          gap="4"
-        >
+        <Flex align="center" gap="4">
           <Link href="/">
             <FaBug />
           </Link>
           <NavLinks />
         </Flex>
-        <AuthStatus />
+        <Flex align="center" gap="4">
+          <ModeToggle />
+          <AuthStatus />
+        </Flex>
       </Flex>
     </nav>
     // </Container>
@@ -77,17 +75,17 @@ const Navbar = () => {
 const AuthStatus = () => {
   const { status, data: session } = useSession();
 
-  if (status === 'loading') {
+  if (status === "loading") {
     return <Skeleton width="3rem" />;
   }
 
-  if (status === 'unauthenticated') {
+  if (status === "unauthenticated") {
     return <Link href="api/auth/signin">Login</Link>;
   }
 
   return (
     <Box>
-      {status === 'authenticated' && (
+      {status === "authenticated" && (
         <DropdownMenu.Root>
           <DropdownMenu.Trigger>
             <Avatar.Root>
