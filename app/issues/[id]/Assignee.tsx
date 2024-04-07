@@ -1,22 +1,22 @@
-'use client';
-import * as Select from '@radix-ui/react-select';
+"use client";
+import * as Select from "@radix-ui/react-select";
 // import classnames from 'classnames';
-import { User } from '.prisma/client';
-import { Issue } from '@prisma/client';
+import { User } from ".prisma/client";
+import { Issue } from "@prisma/client";
 import {
   CheckIcon,
   ChevronDownIcon,
   ChevronUpIcon,
-} from '@radix-ui/react-icons';
+} from "@radix-ui/react-icons";
 
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
-import * as Toast from '@radix-ui/react-toast';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import * as Toast from "@radix-ui/react-toast";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
-import Skeleton from '@/app/components/Skeleton';
+import Skeleton from "@/app/components/Skeleton";
 
 const Assignee = ({ issue }: { issue: Issue }) => {
   const [isError, setError] = useState(false);
@@ -25,7 +25,7 @@ const Assignee = ({ issue }: { issue: Issue }) => {
 
   const getUsersData = async () => {
     try {
-      const { data } = await axios.get<User[]>('/api/users');
+      const { data } = await axios.get<User[]>("/api/users");
       return data;
     } catch (error) {
       console.log(error);
@@ -37,7 +37,7 @@ const Assignee = ({ issue }: { issue: Issue }) => {
     error,
     isLoading,
   } = useQuery({
-    queryKey: ['users'],
+    queryKey: ["users"],
     queryFn: getUsersData,
 
     staleTime: 60 * 1000,
@@ -49,8 +49,8 @@ const Assignee = ({ issue }: { issue: Issue }) => {
 
   const assignIssue = async (UserId: string) => {
     try {
-      await axios.patch('/api/issues/' + issue.id, {
-        assignedToUserId: UserId === 'unassigned' ? null : UserId,
+      await axios.patch("/api/issues/" + issue.id, {
+        assignedToUserId: UserId === "unassigned" ? null : UserId,
       });
       router.refresh();
     } catch (error) {
@@ -61,7 +61,7 @@ const Assignee = ({ issue }: { issue: Issue }) => {
   return (
     <>
       <Select.Root
-        defaultValue={issue?.assignedToUserId || 'unassigned'}
+        defaultValue={issue?.assignedToUserId || "unassigned"}
         onValueChange={assignIssue}
       >
         <Select.Trigger
